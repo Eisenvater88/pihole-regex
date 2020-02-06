@@ -80,14 +80,14 @@ str_regexps_remote = fetch_url(url_regexps_remote)
 # If regexps were fetched, remove any comments and add to set
 if str_regexps_remote:
     regexps_remote.update(x for x in str_regexps_remote.splitlines() if x and x[:1] != '#')
-    print(f'[i] {len(regexps_remote)} regexps collected from {url_regexps_remote}')
+    print('[i] {len(regexps_remote)} regexps collected from {url_regexps_remote}')
 else:
     print('[i] No remote regexps were found.')
     exit(1)
 
 if db_exists:
     # Create a DB connection
-    print(f'[i] Connecting to {path_pihole_db}')
+    print('[i] Connecting to {path_pihole_db}')
 
     try:
         conn = sqlite3.connect(path_pihole_db)
@@ -161,7 +161,7 @@ else:
             regexps_local.update(x for x in (x.strip() for x in fRead) if x and x[:1] != '#')
 
     if regexps_local:
-        print(f'[i] {len(regexps_local)} existing regexps identified')
+        print('[i] {len(regexps_local)} existing regexps identified')
         # If we have a record of the previous install remove the install items from the set
         if os.path.isfile(path_legacy_mmotti_regex) and os.path.getsize(path_legacy_regex) > 0:
             print('[i] Existing mmotti-regex install identified')
@@ -173,14 +173,14 @@ else:
                     regexps_local.difference_update(regexps_legacy)
 
     # Add remote regexps to local regexps
-    print(f'[i] Syncing with {url_regexps_remote}')
+    print('[i] Syncing with {url_regexps_remote}')
     regexps_local.update(regexps_remote)
 
     # Output to regex.list
-    print(f'[i] Outputting {len(regexps_local)} regexps to {path_legacy_regex}')
+    print('[i] Outputting {len(regexps_local)} regexps to {path_legacy_regex}')
     with open(path_legacy_regex, 'w') as fWrite:
         for line in sorted(regexps_local):
-            fWrite.write(f'{line}\n')
+            fWrite.write('{line}\n')
 
     # Output mmotti remote regexps to mmotti-regex.list
     # for future install / uninstall
