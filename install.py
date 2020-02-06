@@ -186,7 +186,7 @@ else:
     # for future install / uninstall
     with open(path_legacy_mmotti_regex, 'w') as fWrite:
         for line in sorted(regexps_remote):
-            fWrite.write(f'{line}\n')
+            fWrite.write('{line}\n')
 
     print('[i] Restarting Pi-hole')
     subprocess.call(['pihole', 'restartdns', 'reload'], stdout=subprocess.DEVNULL)
