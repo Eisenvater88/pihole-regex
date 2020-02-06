@@ -62,7 +62,7 @@ else:
 
 # Exit if Pi-hole dir does not exist
 if not os.path.exists(path_pihole):
-    print(f'{path_pihole} was not found')
+    print('{path_pihole} was not found')
     exit(1)
 else:
     print('[i] Pi-hole path exists')
