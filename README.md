@@ -7,7 +7,8 @@ All commands will need to be entered via Terminal (PuTTY or your SSH client of c
 The installer will determine whether you are using the Pi-hole database or the older style regex.list, then evaluate your current regular expressions and act accordingly. It has been created to make life easier.
 
 #### Installer Requirements
-This script requires [**Python 3.6+**](https://github.com/mmotti/pihole-regex/issues/16) in order to run correctly. It has been written and tested for Raspbian Buster and Ubuntu Server.
+Original: This script requires [**Python 3.6+**](https://github.com/mmotti/pihole-regex/issues/16) in order to run correctly. It has been written and tested for Raspbian Buster and Ubuntu Server.
+This Script should also run, with 3.something where something is something below 6 (at least for install.py)
 
 #### Why is root (sudo) required by the installer?
 At the time of the scripts creation, it is necessary to run as root in order to modify files in `/etc/pihole` (`regex.list` and `gravity.db`)
