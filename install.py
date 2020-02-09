@@ -62,7 +62,7 @@ else:
 
 # Exit if Pi-hole dir does not exist
 if not os.path.exists(path_pihole):
-    print('{path_pihole} was not found')
+    print('{} was not found'.format(path_pihole))
     exit(1)
 else:
     print('[i] Pi-hole path exists')
@@ -80,14 +80,14 @@ str_regexps_remote = fetch_url(url_regexps_remote)
 # If regexps were fetched, remove any comments and add to set
 if str_regexps_remote:
     regexps_remote.update(x for x in str_regexps_remote.splitlines() if x and x[:1] != '#')
-    print('[i] {len(regexps_remote)} regexps collected from {url_regexps_remote}')
+    print('[i] {0} regexps collected from {1}'.format(len(regexps_remote),url_regexps_remote ))
 else:
     print('[i] No remote regexps were found.')
     exit(1)
 
 if db_exists:
     # Create a DB connection
-    print('[i] Connecting to {path_pihole_db}')
+    print('[i] Connecting to {}'.format(path_pihole_db))
 
     try:
         conn = sqlite3.connect(path_pihole_db)
@@ -173,11 +173,11 @@ else:
                     regexps_local.difference_update(regexps_legacy)
 
     # Add remote regexps to local regexps
-    print('[i] Syncing with {url_regexps_remote}')
+    print('[i] Syncing with {}'.format(url_regexps_remote))
     regexps_local.update(regexps_remote)
 
     # Output to regex.list
-    print('[i] Outputting {len(regexps_local)} regexps to {path_legacy_regex}')
+    print('[i] Outputting {0} regexps to {1}'.format(len(regexps_local),path_legacy_regex))
     with open(path_legacy_regex, 'w') as fWrite:
         for line in sorted(regexps_local):
             fWrite.write('{0}\n'.format(line))
