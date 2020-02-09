@@ -58,7 +58,7 @@ else:
 
 # Exit if Pi-hole dir does not exist
 if not os.path.exists(path_pihole):
-    print(f'{path_pihole} was not found')
+    print('{} was not found'.format(path_pihole))
     exit(1)
 else:
     print('[i] Pi-hole path exists')
@@ -76,14 +76,14 @@ str_regexps_remote = fetch_url(url_regexps_remote)
 # If regexps were fetched, remove any comments and add to set
 if str_regexps_remote:
     regexps_remote.update(x for x in str_regexps_remote.splitlines() if x and x[:1] != '#')
-    print(f'[i] {len(regexps_remote)} regexps collected from {url_regexps_remote}')
+    print('[i] {0} regexps collected from {1}'.format(len(regexps_remote),url_regexps_remote))
 else:
     print('[i] No remote regexps were found.')
     exit(1)
 
 if db_exists:
     # Create a DB connection
-    print(f'[i] Connecting to {path_pihole_db}')
+    print('[i] Connecting to {0}'.foramt(path_pihole_db))
 
     try:
         conn = sqlite3.connect(path_pihole_db)
@@ -124,7 +124,7 @@ else:
             regexps_local.update(x for x in (x.strip() for x in fRead) if x and x[:1] != '#')
 
     if regexps_local:
-        print(f'[i] {len(regexps_local)} existing regexps identified')
+        print('[i] {0} existing regexps identified'.format(len(regexps_local)))
         # If we have a record of the previous install remove the install items from the set
         if os.path.isfile(path_legacy_mmotti_regex) and os.path.getsize(path_legacy_regex) > 0:
             print('[i] Existing mmotti-regex install identified')
@@ -132,7 +132,7 @@ else:
                 regexps_legacy.update(x for x in (x.strip() for x in fOpen) if x and x[:1] != '#')
 
                 if regexps_legacy:
-                    print(f'[i] Removing regexps found in {path_legacy_mmotti_regex}')
+                    print('[i] Removing regexps found in {0}'.format(path_legacy_mmotti_regex))
                     regexps_local.difference_update(regexps_legacy)
 
             # Remove mmotti-regex.list as it will no longer be required
@@ -142,10 +142,10 @@ else:
             regexps_local.difference_update(regexps_remote)
 
     # Output to regex.list
-    print(f'[i] Outputting {len(regexps_local)} regexps to {path_legacy_regex}')
+    print('[i] Outputting {0} regexps to {1}'.format(len(regexps_local), path_legacy_regex))
     with open(path_legacy_regex, 'w') as fWrite:
         for line in sorted(regexps_local):
-            fWrite.write(f'{line}\n')
+            fWrite.write('{0}\n'.format(line))
 
     print('[i] Restarting Pi-hole')
     subprocess.call(['pihole', 'restartdns', 'reload'], stdout=subprocess.DEVNULL)
