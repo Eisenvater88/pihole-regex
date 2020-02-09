@@ -7,14 +7,14 @@ All commands will need to be entered via Terminal (PuTTY or your SSH client of c
 The installer will determine whether you are using the Pi-hole database or the older style regex.list, then evaluate your current regular expressions and act accordingly. It has been created to make life easier.
 
 #### Installer Requirements
-Original: This script requires [**Python 3.6+**](https://github.com/mmotti/pihole-regex/issues/16) in order to run correctly. It has been written and tested for Raspbian Buster and Ubuntu Server.
-This Script should also run, with 3.something where something is something below 6 (at least for install.py)
+Original: This script requires Python 3.6 in order to run correctly. It has been written and tested for Raspbian Buster and Ubuntu Server.
+This Script should also run, with 3.something where something is something below 6. I tested it on Raspbian Stretch.
 
 #### Why is root (sudo) required by the installer?
 At the time of the scripts creation, it is necessary to run as root in order to modify files in `/etc/pihole` (`regex.list` and `gravity.db`)
 
 #### Can I use these regexps without using the installer?
-Yes, you can. You can enter them one by one in the Pi-hole web interface.
+Yes, you can. You can enter them one by one in the Pi-hole web interface. I recommend to use the original RegExps from [https://raw.githubusercontent.com/mmotti/pihole-regex/master/regex.list](https://raw.githubusercontent.com/mmotti/pihole-regex/master/regex.list)
 
 ### [OPTIONAL] Back up your existing regex list
 
@@ -33,6 +33,8 @@ sudo cp /etc/pihole/regex.list /etc/pihole/regex.list.bak
 curl -sSl https://raw.githubusercontent.com/Eisenvater88/pihole-regex/master/install.py | sudo python3
 ```
 
+
+
 #### Keeping regexps up-to-date
 The following instructions will create a cron job to run each morning at 02:45 (adjust the time to suit your needs):
 
@@ -46,7 +48,7 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 ```
 3. Save changes
 
-### Removal (still in progress)
+### Removal
 ```
 curl -sSl https://raw.githubusercontent.com/Eisenvater88/pihole-regex/master/uninstall.py | sudo python3
 ```
