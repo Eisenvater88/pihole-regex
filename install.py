@@ -161,7 +161,7 @@ else:
             regexps_local.update(x for x in (x.strip() for x in fRead) if x and x[:1] != '#')
 
     if regexps_local:
-        print('[i] {len(regexps_local)} existing regexps identified')
+        print('[i] {} existing regexps identified'.format(len(regexps_local)))
         # If we have a record of the previous install remove the install items from the set
         if os.path.isfile(path_legacy_mmotti_regex) and os.path.getsize(path_legacy_regex) > 0:
             print('[i] Existing mmotti-regex install identified')
