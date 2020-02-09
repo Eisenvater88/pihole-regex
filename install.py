@@ -180,13 +180,13 @@ else:
     print('[i] Outputting {len(regexps_local)} regexps to {path_legacy_regex}')
     with open(path_legacy_regex, 'w') as fWrite:
         for line in sorted(regexps_local):
-            fWrite.write('{line}\n')
+            fWrite.write('{0}\n'.format(line))
 
     # Output mmotti remote regexps to mmotti-regex.list
     # for future install / uninstall
     with open(path_legacy_mmotti_regex, 'w') as fWrite:
         for line in sorted(regexps_remote):
-            fWrite.write('{line}\n')
+            fWrite.write('{0}\n'.format(line))
 
     print('[i] Restarting Pi-hole')
     subprocess.call(['pihole', 'restartdns', 'reload'], stdout=subprocess.DEVNULL)
